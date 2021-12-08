@@ -10,6 +10,8 @@ clone the repo and build the container
 ```bash
 git clone https://github.com/BlackFire51/docker-names.git
 cd docker-names
+npm install
+npm run build
 docker build -t docker-names .
 ```
 
