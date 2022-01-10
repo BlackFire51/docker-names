@@ -18,6 +18,15 @@ docker run -d \
 
 OR
 
+### use the container Registry via docker-compose
+```bash
+mkdir names
+cd names
+wget https://raw.githubusercontent.com/Nightwire/docker-names/master/docker-compose.yml
+docker-compose up -d
+```
+OR
+
 ### build from source
 
 ```bash

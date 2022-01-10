@@ -1,0 +1,9 @@
+version: '2'
+services:
+  names:
+    container_name: names
+    image: ghcr.io/nightwire/docker-names:master
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/hosts:/mnt/hosts
+    restart: unless-stopped
