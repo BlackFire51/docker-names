@@ -2,7 +2,7 @@ version: '2'
 services:
   names:
     container_name: names
-    image: ghcr.io/nightwire/docker-names:master
+    image: ghcr.io/nightwire/docker-names:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/hosts:/mnt/hosts

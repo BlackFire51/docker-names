@@ -8,7 +8,7 @@ ____
 
 ### use the container Registry
 ```bash
-docker pull ghcr.io/nightwire/docker-names:master
+docker pull ghcr.io/nightwire/docker-names:latest
 docker run -d \
 	--name docker-names \
 	-v /etc/hosts:/mnt/hosts \

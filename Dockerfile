@@ -9,3 +9,6 @@ RUN npm install
 
 # Start
 CMD [ "npm", "run", "start" ]
+
+# Add Github Labels
+LABEL org.opencontainers.image.source https://github.com/Nightwire/docker-names
