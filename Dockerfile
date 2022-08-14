@@ -16,12 +16,8 @@ COPY --from=ts-compiler /usr/app/package*.json ./
 COPY --from=ts-compiler /usr/app/build ./
 RUN npm install --only=production
 
-# Step 3: Use distroless nodejs and copy files from previous
-FROM gcr.io/distroless/nodejs:16
-WORKDIR /usr/app
-COPY --from=ts-remover /usr/app ./
-USER 1000
-CMD ["index.js"]
+# Start
+CMD [ "npm", "run", "start" ]
 
 # Add Github Labels
 LABEL org.opencontainers.image.source https://github.com/Nightwire/docker-names
