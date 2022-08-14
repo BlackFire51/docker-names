@@ -1,20 +1,27 @@
+# From: https://logfetch.com/docker-typescript-production/
+# Step 1: Build Typescript
 FROM node:16-alpine as ts-compiler
+WORKDIR /usr/app
 
-# Create app directory
-WORKDIR /app
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
 COPY package*.json ./
 COPY tsconfig*.json ./
 RUN npm install
 COPY . ./
 RUN npm run build
-# If you are building your code for production
-#RUN npm ci --only=production
 
-CMD [ "npm", "run", "start" ]
+# Step 2: Copy compiled artifacts and run npm
+FROM node:16-alpine as ts-remover
+WORKDIR /usr/app
+COPY --from=ts-compiler /usr/app/package*.json ./
+COPY --from=ts-compiler /usr/app/build ./
+RUN npm install --only=production
+
+# Step 3: Use distroless nodejs and copy files from previous
+FROM gcr.io/distroless/nodejs:16
+WORKDIR /usr/app
+COPY --from=ts-remover /usr/app ./
+USER 1000
+CMD ["index.js"]
 
 # Add Github Labels
 LABEL org.opencontainers.image.source https://github.com/Nightwire/docker-names
